@@ -1,0 +1,8 @@
+{
+  "name": "Clic00SpringIonic",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
