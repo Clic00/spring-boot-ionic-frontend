@@ -8,7 +8,7 @@ import { API_CONFIG } from "../../config/api.config";
 @Injectable()
 export class ClienteService {
     
-    constructor(public http: HttpClient, public storage : StorageService) {
+    constructor(public http: HttpClient) {
     }
     
     findByEmail(email : string) : Observable<ClienteDTO> {
