@@ -26,7 +26,7 @@ export class SignupPage {
 
       this.formGroup = formBuilder.group(
         {
-          nome  : ['Joel', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
+          nome  : ['Joelson', [Validators.required, Validators.minLength(5), Validators.maxLength(120)]],
           email : ['joel@gmail.com', [Validators.required, Validators.email]],
           tipo  : ['1', [Validators.required]],
           cpfOuCnpj : ['13214365590', [Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
