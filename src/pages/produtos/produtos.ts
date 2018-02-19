@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ProdutoDTO } from '../../models/produto.dto';
 import { ProdutoService } from '../../services/domain/produto.service';
 import { CategoriaDTO } from '../../models/categoria.dto';
+import { API_CONFIG } from '../../config/api.config';
 
 @IonicPage()
 @Component({
@@ -28,8 +29,21 @@ export class ProdutosPage {
         response => {
           this.items = response['content'];
           this.categoria_nome = this.navParams.get('categoria_nome');
+          this.loadImageUrls();
         },
         error => {}
       );
+  }
+
+  loadImageUrls() {
+    for (let item of this.items) {
+      this.produtoService.getSmallImageFromBucket(item.id)
+        .subscribe(
+          response => {
+            item.imageUrl = `${API_CONFIG.bucketBaseUrl}/prod${item.id}-small.jpg`;
+          },
+          error => {}
+        );
+    }    
   }
 }
