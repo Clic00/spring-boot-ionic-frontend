@@ -3,14 +3,14 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title *ngIf='!codigoDoPedido'>Confira seu pedido</ion-title>
-    <ion-title *ngIf='codigoDoPedido'>Pedido registrado!</ion-title>
+    <ion-title *ngIf='!codigoDoPedido'>Confirmação</ion-title>
+    <ion-title *ngIf='codigoDoPedido'>Registrado!</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
   <div *ngIf='!codigoDoPedido'>
-    <ion-card>
+    <ion-card class="tamFonte">
       <ion-card-header class="subtitle">
         Itens do pedido
       </ion-card-header>
@@ -55,7 +55,7 @@
       </ion-item>
     </ion-card>
 
-    <ion-card>
+    <ion-card class='tamFonte'>
       <ion-card-header color="danger">
         Pagamento
       </ion-card-header>
@@ -73,7 +73,7 @@
   </div>
 
   <div *ngIf='codigoDoPedido'>
-    <ion-card>
+    <ion-card class='tamFonte'>
       <ion-card-header>
         Seu pedido foi registrado!
       </ion-card-header>
