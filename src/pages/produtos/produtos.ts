@@ -38,10 +38,6 @@ export class ProdutosPage {
           let items = response['content'];
           this.items = this.items.concat(items);
           this.categoria_nome = this.navParams.get('categoria_nome');
-
-          console.log(this.page);
-          console.log(this.items);
-
           this.loadImageUrls(items);
         },
         error => {
@@ -87,7 +83,6 @@ export class ProdutosPage {
   doInfinite(infiniteScroll) {
     this.page++;
     this.loadDataProdutos();
-
     setTimeout(() => {
       infiniteScroll.complete();
     }, 1000);
