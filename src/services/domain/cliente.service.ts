@@ -3,33 +3,48 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
 import { ClienteDTO } from "../../models/cliente.dto";
 import { API_CONFIG } from "../../config/api.config";
+import { ImageUtilService } from "../image-util.service";
 
 @Injectable()
 export class ClienteService {
-    
-    constructor(public http: HttpClient) {
+
+    constructor(public http: HttpClient, public imageUtilService: ImageUtilService) {
     }
-    
-    findByEmail(email : string) {
+
+    findByEmail(email: string) {
         return this.http.get(`${API_CONFIG.baseUrl}/clientes/email?email=${email}`);
     }
 
-    findById(id : string) {
+    findById(id: string) {
         return this.http.get(`${API_CONFIG.baseUrl}/clientes/${id}`);
     }
 
-    getImageFromBucket(id : string) {
+    getImageFromBucket(id: string) {
         let url = `${API_CONFIG.bucketBaseUrl}/cp${id}.jpg`;
-        return this.http.get(url, { responseType : 'blob'});
+        return this.http.get(url, { responseType: 'blob' });
     }
 
-    insert(obj : ClienteDTO) {
-        return this.http.post (
-                    `${API_CONFIG.baseUrl}/clientes`, 
-                    obj,
-                    {
-                        observe : 'response',
-                        responseType : 'text'
-                    });
+    insert(obj: ClienteDTO) {
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/clientes`,
+            obj,
+            {
+                observe: 'response',
+                responseType: 'text'
+            });
+    }
+
+    upLoadPicture(picture) {
+        let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+        let formDate: FormData = new FormData();
+        formDate.set('file', pictureBlob, 'file.png');
+        return this.http.post(
+            `${API_CONFIG.baseUrl}/clientes/picture`,
+            formDate,
+            {
+                observe: 'response',
+                responseType: 'text'
+            });
+
     }
 }

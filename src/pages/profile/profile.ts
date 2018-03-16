@@ -22,10 +22,14 @@ export class ProfilePage {
               public navParams: NavParams,
               public storage: StorageService,
               public clienteService: ClienteService,
-              public camera: Camera) {
+              public camera: Camera,) {
   }
 
   ionViewDidLoad() {
+    this.loadDataProfile();
+  }
+
+  loadDataProfile() {
     let localUser = this.storage.getLocalUser();
     if (localUser && localUser.email) {
       this.clienteService.findByEmail(localUser.email)
@@ -70,5 +74,21 @@ export class ProfilePage {
     }, (err) => {
      // Handle error
     });    
+  }
+
+  sendPicture() {
+    this.clienteService.upLoadPicture(this.picture)
+      .subscribe(
+        response => {
+          this.picture = null;
+          this.loadDataProfile();
+        },
+        error => {
+        }
+      );
+  }
+
+  cancel() {
+    this.picture = null;
   }
 }
